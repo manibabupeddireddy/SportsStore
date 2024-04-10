@@ -1,0 +1,122 @@
+﻿@model IEnumerable<SportsStore.Models.sport>
+
+@{
+
+    ViewBag.Title = "UserView";
+
+    Layout = "~/Views/Shared/_newLayout.cshtml";
+
+}
+
+<h2>PRODUCTS</h2>
+<head>
+
+<style>
+
+    /* Basic styling */
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color:white;
+        padding: 20px;
+    }
+
+    .vegetable {
+        border: 1px solid #ddd;
+        padding: 5px;
+        margin: 10px;
+        background-color: #808080;
+        border-radius: 5px;
+        // box-shadow: 0 2px 4px rgba(255, 99, 71, 0);
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background-color: orange;
+        padding: 20px;
+    }
+
+
+
+    .vegetable h3 {
+        margin: 10px 0;
+    }
+
+    .vegetable p {
+        color: #555;
+    }
+
+    .button {
+        transition-duration: 0.4s;
+    }
+
+        .button:hover {
+            background-color: #04AA6D; /* Green */
+
+            color: white;
+        }
+</style>
+
+</head>
+
+
+<body>
+
+    @foreach (var item in Model)
+
+    {
+
+        <div class="Cricket">
+
+            <h3>@item.Name </h3>
+
+            <p>@item.Name<br>Product: @item.Name <br>Description: @item.Description <br>Price: @item.Price<br>Discount: @item.Discount<br>Category: @item.Category<br></p>
+
+            @using (Html.BeginForm("AddToCart", "Add_Cart", new { Id = item.Id, Name = item.Name, price = item.Price }, FormMethod.Post))
+
+            {
+                <input type="hidden" name="Id" value="@item.Id" />
+
+
+
+                <input type="number" name="quantity" value="1" min="1" />
+
+
+
+                <input type="submit" value="Add to Cart" class="btn btn-primary" />
+
+                <input type="submit" value="Buy Now" class="btn btn-primary" />
+
+
+            }
+
+            <br />
+
+           
+
+        </div>
+        <br />
+        <br />
+    }
+
+    <script>
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+        const popup = document.getElementById('popup');
+
+        addToCartBtn.addEventListener('click', function () {
+
+            popup.style.display = 'block';
+
+            setTimeout(function () {
+
+                popup.style.display = 'none';
+
+            }, 3000);
+
+        });</script>
+
+</body>
